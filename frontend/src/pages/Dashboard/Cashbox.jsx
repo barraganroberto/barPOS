@@ -78,7 +78,7 @@ export default function Cashbox() {
     const grandTotal = totalCash + totalCard;
 
     return (
-        <div className="p-4 space-y-4">
+        <div className="p-4 space-y-4 mt-2">
             <h1 className="text-xl font-bold">Recuento de caja</h1>
 
             <Card>

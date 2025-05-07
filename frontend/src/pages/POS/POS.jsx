@@ -2,6 +2,7 @@ import {
     Amphora,
     BadgeEuro,
     Beer,
+    CirclePlus,
     CreditCard,
     Martini,
     Wine,
@@ -18,14 +19,14 @@ import { Button } from "../../components/ui/button";
 import { useState } from "react";
 
 const mockProducts = [
-    { id: "1", name: "Alhambra Especial", price: 2.5, icon: <Beer /> },
-    { id: "2", name: "Alhambra Roja", price: 3.0, icon: <Beer /> },
-    { id: "3", name: "Alhambra 1925", price: 3.0, icon: <Beer /> },
-    { id: "4", name: "Gin & Tonic", price: 5.0, icon: <Martini /> },
-    { id: "5", name: "Tinto de verano", price: 4.0, icon: <Wine /> },
-    { id: "6", name: "Sangría", price: 4.0, icon: <Wine /> },
-    { id: "7", name: "Whiskey", price: 7.0, icon: <Amphora /> },
-    { id: "8", name: "Rum & Coke", price: 5.0, icon: <Martini /> },
+    { id: "1", name: "Alhambra Esp.", price: 2.5, icon: <Beer size={24} /> },
+    { id: "2", name: "Alhambra Roja", price: 3.0, icon: <Beer size={24} /> },
+    { id: "3", name: "Alhambra 1925", price: 3.0, icon: <Beer size={24} /> },
+    { id: "4", name: "Gin & Tonic", price: 5.0, icon: <Martini size={24} /> },
+    { id: "5", name: "Tinto de verano", price: 4.0, icon: <Wine size={24} /> },
+    { id: "6", name: "Sangría", price: 4.0, icon: <Wine size={24} /> },
+    { id: "7", name: "Whiskey", price: 7.0, icon: <Amphora size={24} /> },
+    { id: "8", name: "Rum & Coke", price: 5.0, icon: <Martini size={24} /> },
 ];
 
 const POS = () => {
@@ -45,7 +46,7 @@ const POS = () => {
     return (
         <div className="p-4 w-full h-full">
             <div className="w-full">
-                <ScrollArea className="h-[450px]">
+                <ScrollArea className="h-[300px]">
                     <div className="grid grid-cols-2 gap-4">
                         {mockProducts.map((product) => (
                             <ProductCard
@@ -77,7 +78,7 @@ const CartCard = ({ cart, total, handlePayment }) => {
                 Pedido actual
             </CardTitle>
             <CardContent className="px-4 space-y-4">
-                <ScrollArea className="h-[178px] space-y-2">
+                <ScrollArea className=" space-y-2">
                     {cart.length === 0 ? (
                         <p className="text-muted-foreground">(...)</p>
                     ) : (
@@ -137,17 +138,16 @@ const ProductCard = ({ product, setCart }) => {
     return (
         <Card className=" -space-y-2">
             <CardHeader>
-                <CardTitle className="flex gap-2 items-center text-xs">
+                <CardTitle className="flex gap-3 items-center text-sm">
                     {product.icon} {product.name}
                 </CardTitle>
                 {/* <CardDescription>Card Description</CardDescription> */}
             </CardHeader>
-            <CardContent className="flex justify-center items-center">
+            <CardContent className="flex justify-between items-center">
                 <p className="text-xl font-bold">{product.price}€</p>
+                <Button size="icon" onClick={() => addToCart(product)}><CirclePlus /></Button>
+
             </CardContent>
-            <CardFooter className="flex items-center justify-center">
-                <Button onClick={() => addToCart(product)}>Add to cart</Button>
-            </CardFooter>
         </Card>
     );
 };
