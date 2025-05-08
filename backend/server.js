@@ -1,15 +1,28 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { configDotenv } = require("dotenv");
+const connectDB = require("./config/db");
+const productRoutes = require("./routes/product.routes");
+const userRoutes = require("./routes/user.routes");
 
 const app = express();
 
-app.use(cors());
+app.use(
+    cors({
+        origin: process.env.CLIENT_URL || "*",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+connectDB();
 
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
+
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 app.get("/", (req, res) => {
